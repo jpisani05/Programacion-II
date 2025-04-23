@@ -83,4 +83,10 @@ public class AlgoritmoCola {
         }
     }
 
+    public void mostrarCola(ColaTDA origen) {
+        while(!origen.estaVacia()) {
+            System.out.println("Elemento desacolado "+ origen.primero());
+            origen.desacolar();
+        }
+    }
 }

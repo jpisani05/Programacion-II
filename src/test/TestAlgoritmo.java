@@ -7,7 +7,7 @@ import tda.PilaTDA;
 public class TestAlgoritmo {
     public static void main(String[] args) {
         PilaTDA aux = new PilaEstatica();
-        aux.iniciarlizar();
+        aux.inicializar();
         System.out.println("Pila inicializada");
         aux.apilar(3);
         System.out.println("Valor 3 cargado");

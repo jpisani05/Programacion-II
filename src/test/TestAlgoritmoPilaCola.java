@@ -9,7 +9,7 @@ public class TestAlgoritmoPilaCola {
 
     public static void main(String[] args) {
         PilaTDA origen = new PilaEstatica();
-        origen.iniciarlizar();
+        origen.inicializar();
         origen.apilar(1);
         origen.apilar(9);
         origen.apilar(2);

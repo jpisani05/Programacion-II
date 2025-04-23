@@ -8,7 +8,7 @@ public class PilaEstatica implements PilaTDA {
     private int cantidad;
 
     @Override
-    public void iniciarlizar() {
+    public void inicializar() {
         valores = new int[100];
         cantidad =0;
     

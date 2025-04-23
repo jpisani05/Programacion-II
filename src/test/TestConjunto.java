@@ -1,13 +1,28 @@
 package test;
 
 import algoritmo.AlgoritmoConjunto;
+import implementacion.ConjuntoDinamico;
 import implementacion.ConjuntoEstatico;
 import tda.ConjuntoTDA;
 
 public class TestConjunto {
     public static void main(String[] args) {
-        ConjuntoTDA aux = new ConjuntoEstatico();
-        ConjuntoTDA aux2 = new ConjuntoEstatico();
+
+        ConjuntoTDA aux3 = new ConjuntoDinamico();
+        aux3.inicializar();
+        aux3.agregar(1);
+        aux3.agregar(12);
+        aux3.agregar(0);
+        while (! aux3.estaVacia()){
+            int valor = aux3.elegir();
+            System.out.println(valor);
+            aux3.sacar(valor);
+        }
+        System.out.println("--------------------");
+
+
+        ConjuntoTDA aux = new ConjuntoDinamico();
+        ConjuntoTDA aux2 = new ConjuntoDinamico();
         aux.inicializar();
         aux.agregar(5);
         aux.agregar(28);

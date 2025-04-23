@@ -3,7 +3,7 @@ package tda;
 public interface PilaTDA {
 
     /**Este metodo inicizaliza la estructura*/
-    public void iniciarlizar();
+    public void inicializar();
 
     /**debe estar inicializada*/
     public void apilar (int valor);

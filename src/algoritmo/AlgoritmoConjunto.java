@@ -1,5 +1,6 @@
 package algoritmo;
 
+import implementacion.ConjuntoDinamico;
 import implementacion.ConjuntoEstatico;
 import tda.ConjuntoTDA;
 
@@ -29,5 +30,18 @@ public class AlgoritmoConjunto {
         return interseccion;
 
     }
+
+    public static ConjuntoTDA unionConjunto(ConjuntoTDA c1, ConjuntoTDA c2) {
+
+        while (c1.estaVacia()){
+            int k = c1.elegir();
+            c1.sacar(k);
+            c2.agregar(k);
+        }
+
+
+        return c2;
+    }
+
 
 }

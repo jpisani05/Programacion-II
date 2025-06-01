@@ -4,74 +4,81 @@ import tda.ABBTDA;
 
 public class AVL implements ABBTDA {
 
-    NodoAVL nodo;
-
-    public AVL() {
+    class NodoAVL {
+        int valor;
+        AVL hijoIzquierdo;
+        AVL hijoDerecho;
     }
 
+    private NodoAVL raiz;
+
     public void agregar(int valor) {
-        if (nodo == null) {
-            nodo = new NodoAVL();
-            nodo.raiz = valor;
-            nodo.hijoIzquierdo = new AVL();
-            nodo.hijoIzquierdo.inicializar();
-            nodo.hijoDerecho = new AVL();
-            nodo.hijoDerecho.inicializar();
-            System.out.println("Agrego:" + valor);
-        } else if (nodo.raiz > valor) {
-            nodo.hijoIzquierdo.agregar(valor);
+        if (raiz == null) {
+            raiz = new NodoAVL();
+            raiz.valor = valor;
+            raiz.hijoIzquierdo = new AVL();
+            raiz.hijoIzquierdo.inicializar();
+            raiz.hijoDerecho = new AVL();
+            raiz.hijoDerecho.inicializar();
+        } else if (raiz.valor > valor) {
+            raiz.hijoIzquierdo.agregar(valor);
             balancear(this);
-        } else if (nodo.raiz < valor) {
-            nodo.hijoDerecho.agregar(valor);
+        } else if (raiz.valor < valor) {
+            raiz.hijoDerecho.agregar(valor);
             balancear(this);
         }
 
     }
 
+    //O(1)
     public boolean arbolVacio() {
-        return nodo == null;
+        return raiz == null;
     }
 
     public void eliminar(int valor) {
-        if (nodo != null) {
-            if (nodo.raiz == valor) {
-                if (nodo.hijoIzquierdo.arbolVacio() && nodo.hijoDerecho.arbolVacio()) {
-                    nodo = null;
-                    System.out.println("Elimino:" + valor);
-                } else if (!nodo.hijoIzquierdo.arbolVacio()) {
-                    nodo.raiz = mayor(nodo.hijoIzquierdo);
-                    nodo.hijoIzquierdo.eliminar(nodo.raiz);
+        if (raiz != null) {
+            if (raiz.valor == valor) {
+                if (raiz.hijoIzquierdo.arbolVacio() && raiz.hijoDerecho.arbolVacio()) {
+                    raiz = null;
+                } else if (!raiz.hijoIzquierdo.arbolVacio()) {
+                    raiz.valor = mayor(raiz.hijoIzquierdo);
+                    raiz.hijoIzquierdo.eliminar(raiz.valor);
                     balancear(this);
                 } else {
-                    nodo.raiz = menor(nodo.hijoDerecho);
-                    nodo.hijoDerecho.eliminar(nodo.raiz);
+                    raiz.valor = menor(raiz.hijoDerecho);
+                    raiz.hijoDerecho.eliminar(raiz.valor);
                     balancear(this);
                 }
-            } else if (nodo.raiz > valor) {
-                nodo.hijoIzquierdo.eliminar(valor);
+            } else if (raiz.valor > valor) {
+                raiz.hijoIzquierdo.eliminar(valor);
                 balancear(this);
             } else {
-                nodo.hijoDerecho.eliminar(valor);
+                raiz.hijoDerecho.eliminar(valor);
                 balancear(this);
             }
         }
 
     }
 
+
+    //O(1)
     public AVL hijoDerecho() {
-        return nodo.hijoDerecho;
+        return raiz.hijoDerecho;
     }
 
+    //O(1)
     public AVL hijoIzquierdo() {
-        return nodo.hijoIzquierdo;
+        return raiz.hijoIzquierdo;
     }
 
+    //O(1)
     public void inicializar() {
-        nodo = null;
+        raiz = null;
     }
 
+    //O(1)
     public int raiz() {
-        return nodo.raiz;
+        return raiz.valor;
     }
 
     private int mayor(ABBTDA arbol) {
@@ -147,26 +154,21 @@ public class AVL implements ABBTDA {
 
     }
 
+    //O(1)
     private void rotarIzquierda(AVL arbol) {
-        NodoAVL nuevoPadre = arbol.hijoDerecho().nodo;
-        arbol.hijoDerecho().nodo = nuevoPadre.hijoIzquierdo.nodo;
-        nuevoPadre.hijoIzquierdo.nodo = arbol.nodo;
-        arbol.nodo = nuevoPadre;
+        NodoAVL nuevoPadre = arbol.hijoDerecho().raiz;
+        arbol.hijoDerecho().raiz = nuevoPadre.hijoIzquierdo.raiz;
+        nuevoPadre.hijoIzquierdo.raiz = arbol.raiz;
+        arbol.raiz = nuevoPadre;
     }
 
-    private void rotarDerecha(AVL a) {
-        NodoAVL nuevoPadre = a.hijoIzquierdo().nodo;
-        a.hijoIzquierdo().nodo = nuevoPadre.hijoDerecho.nodo;
-        nuevoPadre.hijoDerecho.nodo = a.nodo;
-        a.nodo = nuevoPadre;
+    //O(1)
+    private void rotarDerecha(AVL arbol) {
+        NodoAVL nuevoPadre = arbol.hijoIzquierdo().raiz;
+        arbol.hijoIzquierdo().raiz = nuevoPadre.hijoDerecho.raiz;
+        nuevoPadre.hijoDerecho.raiz = arbol.raiz;
+        arbol.raiz = nuevoPadre;
     }
 
-    class NodoAVL {
-        int raiz;
-        AVL hijoIzquierdo;
-        AVL hijoDerecho;
 
-        NodoAVL() {
-        }
-    }
 }

@@ -11,7 +11,7 @@ import tda.ConjuntoTDA;
 public class CreoArbol {
 
     public static void main(String[] args) {
-        ABBTDA arbol = new AVL();
+        ABBTDA arbol = new ABB();
         arbol.inicializar();
         arbol.agregar(20);
         arbol.agregar(30);
@@ -21,15 +21,39 @@ public class CreoArbol {
         arbol.agregar(25);
         arbol.agregar(35);
 
+        System.out.println(arbol.hijoDerecho().raiz());
+
+        System.out.println("-----------------------------");
         ABBTDA arbol2 = new AVL();
         arbol2.inicializar();
         arbol2.agregar(5);
         arbol2.agregar(25);
+
+        System.out.println(arbol2.raiz());
+
         arbol2.agregar(10);
+
+        System.out.println(arbol2.raiz());
+
         arbol2.agregar(20);
         arbol2.agregar(35);
         arbol2.agregar(30);
+
+        System.out.println(arbol2.raiz());
+        //System.out.println(arbol2.hijoDerecho().hijoDerecho().raiz());
+        System.out.println(arbol2.hijoDerecho().hijoIzquierdo().raiz());
+
         arbol2.agregar(15);
+        arbol2.agregar(12);
+        arbol2.agregar(37);
+        arbol2.agregar(4);
+        arbol2.agregar(6);
+        arbol2.agregar(29);
+        arbol2.agregar(31);
+        arbol2.agregar(36);
+        arbol2.agregar(39);
+
+        System.out.println("--------------------");
 
         System.out.println("Arbol creado y Cargado");
         System.out.println("Raiz: " + arbol.raiz());
@@ -51,6 +75,9 @@ public class CreoArbol {
             conj.sacar(k);
             System.out.println("Elemento 1: " + k);
         }
+
+
+        System.out.println(aux.altura(arbol2));
 
     }
 

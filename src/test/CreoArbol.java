@@ -2,6 +2,7 @@ package test;
 
 import algoritmo.AlgoritmosABB;
 import implementacion.ABB;
+import implementacion.AVL;
 import implementacion.ConjuntoDinamico;
 import implementacion.ConjuntoEstatico;
 import tda.ABBTDA;
@@ -10,7 +11,7 @@ import tda.ConjuntoTDA;
 public class CreoArbol {
 
     public static void main(String[] args) {
-        ABBTDA arbol = new ABB();
+        ABBTDA arbol = new AVL();
         arbol.inicializar();
         arbol.agregar(20);
         arbol.agregar(30);
@@ -19,6 +20,16 @@ public class CreoArbol {
         arbol.agregar(15);
         arbol.agregar(25);
         arbol.agregar(35);
+
+        ABBTDA arbol2 = new AVL();
+        arbol2.inicializar();
+        arbol2.agregar(5);
+        arbol2.agregar(25);
+        arbol2.agregar(10);
+        arbol2.agregar(20);
+        arbol2.agregar(35);
+        arbol2.agregar(30);
+        arbol2.agregar(15);
 
         System.out.println("Arbol creado y Cargado");
         System.out.println("Raiz: " + arbol.raiz());

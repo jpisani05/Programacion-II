@@ -52,5 +52,114 @@ public class AlgoritmosABB {
         return conjuntoHojas;
     }
 
+    public int menor(ABBTDA arbol){
+        if (arbol.hijoIzquierdo().arbolVacio()){
+            return arbol.raiz();
+        }
+        else {
+            return menor(arbol.hijoDerecho());
+        }
+    }
+
+    public int suma(ABBTDA arbol){
+        if (arbol.hijoIzquierdo().arbolVacio() && arbol.hijoDerecho().arbolVacio()){
+            return arbol.raiz();
+        }
+        else {
+            return arbol.raiz() + suma(arbol.hijoDerecho()) + suma(arbol.hijoIzquierdo());
+        }
+    }
+
+
+    public int sumaHojas(ABBTDA arbol){
+        if (arbol.hijoIzquierdo().arbolVacio() && arbol.hijoDerecho().arbolVacio()){
+            return 1;
+        }
+
+        else {
+            return sumaHojas(arbol.hijoIzquierdo()) + sumaHojas(arbol.hijoDerecho());
+        }
+    }
+
+    private int profundidad(int valor, ABBTDA arbol){
+        if (valor == arbol.raiz()){
+            return 0;
+        }
+
+        else {
+            if (valor > arbol.raiz()){
+                return 1 + profundidad(valor, arbol.hijoDerecho());
+            }
+
+            else {
+                return 1 + profundidad(valor, arbol.hijoIzquierdo());
+            }
+        }
+
+    }
+
+
+    public int altura(ABBTDA arbol){
+        ConjuntoTDA hojas = hojas(arbol);
+        int mayor = 0;
+        while (!hojas.estaVacia()){
+            int k = hojas.elegir();
+            hojas.sacar(k);
+
+            int profundo = profundidad(k, arbol);
+            if (mayor < profundo){
+                mayor = profundo;
+            }
+        }
+
+        return mayor;
+    }
+
+
+    public boolean igualdad(ABBTDA arbol, ABBTDA arbol2){
+        ConjuntoTDA aux = aconjuntar(arbol);
+        ConjuntoTDA aux2 = aconjuntar(arbol2);
+
+        while (!aux2.estaVacia()){
+            int k = aux2.elegir();
+            aux2.sacar(k);
+
+            if (!aux.pertenece(k)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public ConjuntoTDA aconjuntar(ABBTDA arbol){
+        ConjuntoTDA conjuntoArbol = new ConjuntoDinamico();
+        conjuntoArbol.inicializar();
+
+        conjuntoArbol.agregar(arbol.raiz());
+
+        if (!arbol.hijoIzquierdo().arbolVacio()){
+            ConjuntoTDA conjuntoAux = aconjuntar(arbol.hijoIzquierdo());
+            while (!conjuntoAux.estaVacia()){
+                int k = conjuntoAux.elegir();
+                conjuntoAux.sacar(k);
+                conjuntoArbol.agregar(k);
+            }
+        }
+
+        if (!arbol.hijoDerecho().arbolVacio()){
+            ConjuntoTDA conjuntoAux = aconjuntar(arbol.hijoDerecho());
+            while (!conjuntoAux.estaVacia()){
+                int k = conjuntoAux.elegir();
+                conjuntoAux.sacar(k);
+                conjuntoArbol.agregar(k);
+            }
+        }
+
+        return conjuntoArbol;
+    }
+
+
+
 
 }

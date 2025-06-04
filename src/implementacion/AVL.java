@@ -12,6 +12,7 @@ public class AVL implements ABBTDA {
 
     private NodoAVL raiz;
 
+    //O(log n)
     public void agregar(int valor) {
         if (raiz == null) {
             raiz = new NodoAVL();
@@ -27,7 +28,6 @@ public class AVL implements ABBTDA {
             raiz.hijoDerecho.agregar(valor);
             balancear(this);
         }
-
     }
 
     //O(1)
@@ -35,6 +35,7 @@ public class AVL implements ABBTDA {
         return raiz == null;
     }
 
+    //O(log n)
     public void eliminar(int valor) {
         if (raiz != null) {
             if (raiz.valor == valor) {
@@ -57,7 +58,6 @@ public class AVL implements ABBTDA {
                 balancear(this);
             }
         }
-
     }
 
 
@@ -81,34 +81,34 @@ public class AVL implements ABBTDA {
         return raiz.valor;
     }
 
+    //O(log n)
     private int mayor(ABBTDA arbol) {
-        int res;
-        if (arbol.hijoDerecho().arbolVacio()) {
-            res = arbol.raiz();
-        } else {
-            res = mayor(arbol.hijoDerecho());
+        if (arbol.hijoDerecho().arbolVacio()){
+            return arbol.raiz();
         }
-
-        return res;
+        else {
+            return mayor(arbol.hijoIzquierdo());
+        }
     }
 
+    //O(log n)
     private int menor(ABBTDA arbol) {
-        int res;
-        if (arbol.hijoIzquierdo().arbolVacio()) {
-            res = arbol.raiz();
-        } else {
-            res = menor(arbol.hijoIzquierdo());
+        if (arbol.hijoIzquierdo().arbolVacio()){
+            return arbol.raiz();
         }
-
-        return res;
+        else {
+            return menor(arbol.hijoIzquierdo());
+        }
     }
 
+    //O(log n)
     private int obtenerDA() {
-        int alturaIzq = altura(hijoIzquierdo());
-        int alturaDer = altura(hijoDerecho());
-        return alturaDer - alturaIzq;
+        int alturaIzquierda = altura(hijoIzquierdo());
+        int alturaDerecha = altura(hijoDerecho());
+        return alturaDerecha - alturaIzquierda;
     }
 
+    //O(log n)
     private int altura(ABBTDA arbol) {
         int altura = -1;
         if (!arbol.arbolVacio()) {
@@ -125,10 +125,10 @@ public class AVL implements ABBTDA {
                 }
             }
         }
-
         return altura;
     }
 
+    //O(log n)
     private void balancear(AVL arbol) {
         if (arbol.obtenerDA() >= 2) {
             System.out.print("Rotacion ");
@@ -151,7 +151,6 @@ public class AVL implements ABBTDA {
                 rotarDerecha(arbol);
             }
         }
-
     }
 
     //O(1)

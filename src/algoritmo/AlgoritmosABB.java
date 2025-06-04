@@ -239,13 +239,14 @@ public class AlgoritmosABB {
     public ConjuntoTDA recorroArbol2 (ABBTDA arbol,DiccionarioMultipleTDA dicm, ConjuntoTDA c2) {
         ConjuntoTDA c1 = dicm.obtenerClaves();
 
-        while (!c1.estaVacia()) {
-            int k = c1.elegir();
-            c1.sacar(k);
-            if (arbol.raiz() == k) {
-                c2.agregar(k);
+        if (!arbol.hijoDerecho().arbolVacio() || !arbol.hijoIzquierdo().arbolVacio())
+            while (!c1.estaVacia()) {
+                int k = c1.elegir();
+                c1.sacar(k);
+                if (arbol.raiz() == k) {
+                    c2.agregar(k);
+                }
             }
-        }
         if (!arbol.hijoIzquierdo().arbolVacio()) {
             recorroArbol2(arbol.hijoIzquierdo(), dicm, c2);
         }
